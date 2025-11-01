@@ -1,10 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { Phone, Menu, X } from "lucide-react";
+import { OptimizedImage } from "@/components/ui/optimized-image";
+import { useHeaderScroll, useClickOutside } from "./header-hooks";
 
 type NavLink = {
     href: string;
@@ -33,21 +36,17 @@ const allServicesLinks: NavLink[] = [
 
 const HeaderNavigation = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
     const [isServicesOpen, setIsServicesOpen] = useState(false);
     const pathname = usePathname();
+    const headerRef = useRef<HTMLElement>(null);
+    const servicesRef = useRef<HTMLDivElement>(null);
 
-    // ✅ GPU-friendly passive scroll listener
-    useEffect(() => {
-        const handleScroll = () =>
-            setIsScrolled(window.scrollY > 20);
+    // Use custom hooks for scroll and click outside - using type assertion for compatibility
+    const safeServicesRef = servicesRef as React.RefObject<HTMLElement>;
+    const isScrolled = useHeaderScroll(20);
+    useClickOutside(safeServicesRef, () => setIsServicesOpen(false));
 
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    // ✅ No forced reflows — CSS toggle instead of JS styles
-    useEffect(() => {
+    React.useEffect(() => {
         document.documentElement.classList.toggle("overflow-hidden", isMenuOpen);
     }, [isMenuOpen]);
 
@@ -62,8 +61,8 @@ const HeaderNavigation = () => {
                         href={link.href}
                         onClick={() => isMobile && setIsMenuOpen(false)}
                         className={`${isMobile
-                                ? "block py-4 text-lg font-semibold"
-                                : "text-[15px] font-semibold tracking-[-0.01em] relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#c9a05f] after:transition-all after:duration-300 hover:after:w-full"
+                            ? "block py-4 text-lg font-semibold"
+                            : "text-[15px] font-semibold tracking-[-0.01em] relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#c9a05f] after:transition-all after:duration-300 hover:after:w-full"
                             } transition-colors duration-200 hover:text-[#c9a05f] ${pathname === link.href
                                 ? "text-[#c9a05f]"
                                 : isMobile
@@ -86,17 +85,19 @@ const HeaderNavigation = () => {
                             prefetch
                             href="/services/"
                             className={`flex items-center gap-1 text-[15px] font-semibold tracking-[-0.01em] transition-colors duration-200 hover:text-[#c9a05f] relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[#c9a05f] after:transition-all after:duration-300 hover:after:w-full ${pathname.startsWith("/services/")
-                                    ? "text-[#c9a05f]"
-                                    : "text-[#faf8f5]"
+                                ? "text-[#c9a05f]"
+                                : "text-[#faf8f5]"
                                 }`}
                         >
                             Services
                         </Link>
 
                         <div
+                            role="menu"
+                            aria-label="Services menu"
                             className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 transition-all duration-200 ${isServicesOpen
-                                    ? "opacity-100 visible translate-y-0"
-                                    : "opacity-0 invisible -translate-y-1"
+                                ? "opacity-100 visible translate-y-0"
+                                : "opacity-0 invisible -translate-y-1"
                                 }`}
                         >
                             <div
@@ -122,6 +123,7 @@ const HeaderNavigation = () => {
                                             <div className="w-2 h-2 rounded-full bg-[#c9a05f] mt-1.5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                             <span className="text-[#2d3748] text-[14px] font-medium group-hover:text-[#c9a05f] transition-colors !no-underline !text-left !not-italic">
                                                 {service.label}
+                                                <span className="sr-only"> - Click to learn more about our {service.label.toLowerCase()} services</span>
                                             </span>
                                         </Link>
                                     ))}
@@ -182,7 +184,7 @@ const HeaderNavigation = () => {
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-[80px] lg:h-[90px]">
                     <div className="flex-shrink-0">
-                        <Link prefetch href="/" aria-label="USA Plumbing Service - Homepage">
+                        <Link href="/" className="inline-block">
                             <Image
                                 src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/5a174148-bb4f-467b-b662-0dbf5a961f30-usaplumbingservice-com/assets/images/logo-2.png"
                                 alt="USA Plumbing Service"

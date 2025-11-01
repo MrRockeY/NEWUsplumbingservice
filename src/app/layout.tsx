@@ -5,6 +5,7 @@ import ErrorReporter from "@/components/ErrorReporter";
 import Script from "next/script";
 import SmoothScroll from "@/components/sections/SmoothScroll";
 import { Montserrat, Open_Sans } from "next/font/google";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 
 const montserrat = Montserrat({
@@ -45,6 +46,7 @@ export default function RootLayout({
             <body className="antialiased bg-white">
                 {/* Render AFTER layout mounts (avoid blocking initial render) */}
                 <SmoothScroll />
+                <ScrollToTop />
 
                 <main>{children}</main>
 
