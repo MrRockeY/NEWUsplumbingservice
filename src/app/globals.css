@@ -1,0 +1,225 @@
+/* Updated: 2025-10-31T10:50:15.721Z */
+/* Updated: 2025-10-31T09:05:54.899Z */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;600&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: #faf8f5;
+  --color-foreground: #2d3748;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #2d3748;
+
+  --color-popover: #ffffff;
+  --color-popover-foreground: #2d3748;
+
+  --color-primary: #1a2332;
+  --color-primary-foreground: #faf8f5;
+
+  --color-secondary: #f5f1e8;
+  --color-secondary-foreground: #2d3748;
+
+  --color-muted: #e8e4dc;
+  --color-muted-foreground: #6b7280;
+
+  --color-accent: #c9a05f;
+  --color-accent-foreground: #1a2332;
+
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #fafafa;
+
+  --color-border: #d4cfc3;
+  --color-input: #e8e4dc;
+  --color-ring: #c9a05f;
+
+  --color-chart-1: #c9a05f;
+  --color-chart-2: #6b8e7f;
+  --color-chart-3: #1a2332;
+  --color-chart-4: #5a7d8f;
+  --color-chart-5: #a67c52;
+
+  --color-sidebar: #f5f1e8;
+  --color-sidebar-foreground: #2d3748;
+  --color-sidebar-primary: #1a2332;
+  --color-sidebar-primary-foreground: #faf8f5;
+  --color-sidebar-accent: #e8e4dc;
+  --color-sidebar-accent-foreground: #1a2332;
+  --color-sidebar-border: #d4cfc3;
+  --color-sidebar-ring: #c9a05f;
+
+  --radius-lg: 0.5rem;
+  --radius-md: calc(0.5rem - 2px);
+  --radius-sm: calc(0.5rem - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+
+  /* Premium Business-Class Colors */
+  --color-navy: #1a2332;
+  --color-navy-light: #2c3e50;
+  --color-gold: #c9a05f;
+  --color-gold-dark: #b8860b;
+  --color-cream: #faf8f5;
+  --color-cream-dark: #f5f1e8;
+  --color-charcoal: #2d3748;
+  --color-charcoal-light: #4a5568;
+  --color-sage: #6b8e7f;
+  --color-teal: #5a7d8f;
+
+  /* Custom colors based on premium design */
+  --color-header-bg: #1a2332;
+  --color-header-text: #faf8f5;
+  --color-button-primary-bg: #c9a05f;
+  --color-button-primary-text: #1a2332;
+  --color-button-secondary-bg: #1a2332;
+  --color-button-secondary-text: #faf8f5;
+  --color-footer-bg: #1a2332;
+  --color-footer-text: #faf8f5;
+  --color-section-heading: #1a2332;
+  --color-text-body: #4a5568;
+  --color-link: #c9a05f;
+  --color-form-field-border: #d4cfc3;
+  --color-form-field-bg: #ffffff;
+  --color-card-border: #e8e4dc;
+  --color-card-shadow: #00000010;
+  --color-hero-overlay: #1a233280;
+
+  /* Font families */
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Open Sans", sans-serif;
+}
+
+/* Utility classes for components that previously used next/font/google */
+.font-space-grotesk { font-family: 'Space Grotesk', sans-serif; }
+.font-inter { font-family: 'Inter', sans-serif; }
+
+/*
+  The default border color has changed to currentColor in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: #d4cfc3;
+  }
+}
+
+@layer utilities {
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-cream);
+  }
+}
+
+@layer base {
+  :root {
+    --background: var(--color-background);
+    --foreground: var(--color-foreground);
+    --card: var(--color-card);
+    --card-foreground: var(--color-card-foreground);
+    --popover: var(--color-popover);
+    --popover-foreground: var(--color-popover-foreground);
+    --primary: var(--color-primary);
+    --primary-foreground: var(--color-primary-foreground);
+    --secondary: var(--color-secondary);
+    --secondary-foreground: var(--color-secondary-foreground);
+    --muted: var(--color-muted);
+    --muted-foreground: var(--color-muted-foreground);
+    --accent: var(--color-accent);
+    --accent-foreground: var(--color-accent-foreground);
+    --destructive: var(--color-destructive);
+    --destructive-foreground: var(--color-destructive-foreground);
+    --border: var(--color-border);
+    --input: var(--color-input);
+    --ring: var(--color-ring);
+    --chart-1: var(--color-chart-1);
+    --chart-2: var(--color-chart-2);
+    --chart-3: var(--color-chart-3);
+    --chart-4: var(--color-chart-4);
+    --chart-5: var(--color-chart-5);
+    --radius: var(--radius-lg);
+    --sidebar-background: var(--color-sidebar);
+    --sidebar-foreground: var(--color-sidebar-foreground);
+    --sidebar-primary: var(--color-sidebar-primary);
+    --sidebar-primary-foreground: var(--color-sidebar-primary-foreground);
+    --sidebar-accent: var(--color-sidebar-accent);
+    --sidebar-accent-foreground: var(--color-sidebar-accent-foreground);
+    --sidebar-border: var(--color-sidebar-border);
+    --sidebar-ring: var(--color-sidebar-ring);
+  }
+
+  body {
+    color: var(--color-text-body);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-section-heading);
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+  }
+
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.75rem; }
+  h4 { font-size: 1.5rem; }
+  h5 { font-size: 1.25rem; }
+  h6 { font-size: 1rem; }
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  a {
+    color: var(--color-link);
+    text-decoration: none;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Hide Next.js error overlay portal */
+nextjs-portal {
+  display: none !important;
+}
+
+:root{
+  --navy-900: #0f2330;     /* deep navy */
+  --navy-800: #112935;
+  --gold: #c9a05f;         /* brand gold (adjust if needed) */
+  --gold-dark: #b8873f;
+  --muted: #e9e4db;        /* subtle beige for paragraphs if used */
+  --glass: rgba(255,255,255,0.04);
+}
