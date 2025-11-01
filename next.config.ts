@@ -30,9 +30,12 @@ const nextConfig: NextConfig = {
     compiler: {
         removeConsole: process.env.NODE_ENV === 'production',
     },
-    swcMinify: true,
     experimental: {
-        optimizeCss: true,
+        optimizeCss: {
+            tailwind: true,
+            minify: true,
+            fontLoaders: true
+        },
     },
     turbopack: {
         rules: {
