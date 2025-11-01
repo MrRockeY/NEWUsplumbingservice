@@ -34,12 +34,17 @@ const formSchema = z.object({
     attachmentBase64: z.string().optional()
 });
 
-export default function ContactFormSection() {
+interface ContactFormSectionProps {
+    className?: string;
+}
+
+export default function ContactFormSection({ className = "" }: ContactFormSectionProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
     const [attachmentFile, setAttachmentFile] = useState<File | null>(null);
     const [attachmentPreview, setAttachmentPreview] = useState<string | null>(null);
+    const [focusedField, setFocusedField] = useState<string | null>(null);
 
     const pathname = usePathname();
 

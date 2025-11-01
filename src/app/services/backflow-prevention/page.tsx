@@ -74,7 +74,30 @@ export default function BackflowPreventionPage() {
                     </div>
                 </section>
 
-                <ContactFormSection />
+                <section className="py-16 md:py-24 bg-[#f5f1e8]">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                            <div className="lg:sticky lg:top-[120px]">
+                                <h2 className="font-['Montserrat'] font-bold text-[#1a2332] text-3xl md:text-4xl mb-6">Request Backflow Prevention Service</h2>
+                                <p className="font-['Open_Sans'] text-[#4a5568] text-lg leading-relaxed mb-8">Professional backflow prevention device testing, installation, and certification services.</p>
+                                <div className="space-y-6">
+                                    {services.slice(0, 3).map((s, i) => (
+                                        <div key={i} className="flex items-start gap-4">
+                                            <div className="w-10 h-10 bg-[#c9a05f] rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold">{i + 1}</div>
+                                            <div>
+                                                <h3 className="font-['Montserrat'] font-bold text-[#1a2332] mb-2">{s}</h3>
+                                                <p className="font-['Open_Sans'] text-[#4a5568]">Expert service for {s.toLowerCase()}.</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="lg:min-h-[600px]">
+                                <ContactFormSection className="max-w-[640px]" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
                 <section className="py-16 md:py-24 bg-gradient-to-r from-[#1a2332] to-[#2c3e50]">
                     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
