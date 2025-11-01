@@ -144,8 +144,8 @@ export default function FooterSection() {
                     </p>
                     <p className="text-[#9ca3af]">
                         Website by{" "}
-                        <a className="text-[#c9a05f] hover:text-[#b8860b]" href="https://www.webstractmarketing.com/" target="_blank">
-                            Webstract Marketing
+                        <a className="text-[#c9a05f] hover:text-[#b8860b]" href="https://mrrockey-com.web.app/" target="_blank">
+                            Mr RockeY
                         </a>
                     </p>
                 </div>
